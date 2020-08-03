@@ -1,0 +1,54 @@
+Definitions:
+docker registry - storage of all the docker images. we can store the image either in public or private repositories.
+	these repositories can be locally or on the cloud. one repository like this is docker hub.
+docker hub - a cloud hosted repository provided by docker. it has public and private repositories. from repository
+	we can pull an image and prepare our own container. we can also write an image and upload that to the repository.
+docker file - a text file that contains all commands, in order, needed to build a given docker image. it has to be called Dockerfile.txt.	
+docker image - read only template that are used to create containers. 
+docker container - runtime instances of docker image. it contains everything we need to run an application or a service
+docker compose file - a yml file that will be used to execute multiple docker files to create multiple containers simultaneously
+docker swarm - let's me create multiple containers from multiple hosts by defining a manager host of the network
+	and joining other hosts to it to perform other tasks
+
+Credentials:
+docker hub repository: username:556667755577575, password: baki18B.18
+repository name for example will be: 556667755577575/test_repo
+
+Commands:
+I can open cmd or GIT bash to run the following commands:
+"docker --version" - to see what's docker version is
+"docker --help" - to see all of the possible commands that I can use
+"docker images" - to see which images are installed in my machine
+"docker pull <name of image (like ubuntu)>" - to pull ubunto image from docker hub
+"docker run -it -d <name of image (like ubuntu)>" - to run an ubuntu image to create a container
+"docker run -p <port of host>:<port of container> --name=<name of container> <name of image> - to run an image to create a container
+	and mapped the port of the container to the port of the host (so I will be able to call this container from "outside"
+"docker ps -a" - to show all of the containers
+"docker ps" - to show only running containers
+"docker exec -it <container id> bash" or "winpty docker exec -it c261a71712e8 bash" - accessing a running container
+"exit" - to come out of the container
+"docker stop <container id>" - to stop that container
+"winpty docker login" - to login to my docker hub repository. it will ask the credentials and I should input the credentials above
+"docker commit <container id> <repository name>" - to create an image file from a container
+"docker push <name of image>" - to push this image file to the repository
+"docker rm <container id>" - to delete a container
+"docker rmi <image id>" - to delete an image
+"docker build -t <name of image> <folder where the docker file is present (if it's here then we use "."> - to build an image from docker file
+"docker-compose build" - to build several containers from a docker compose file
+"docker-compose up" - to run several containers from a docker compose file
+"docker swarm init --advertise-addr <ip address of host machine>" - initialize the current host as a manager host. this will generate
+	a command to add a worker to that network
+"docker swarm join-token worker" - this will retrieve the same output as "docker swarm init" command
+
+Docker file commands:
+FROM - defines the base image that's use to start the build process. for example: "FROM ubuntu" creates a layer from the ubuntu Docker image
+RUN <some command> && <other command> - executes commands usually to build a docker image
+CMD - executes commands within the container itself (not to create the docker image like RUN)
+ENTRYPOINT - after the docker image is build, the ENTRYPOINT line will be executed first when creating the container
+ADD <src> <dest> - copy file from one directory to another
+ENV <env name> <env value> - to set the environment variables
+WORKDIR - set the directory in which the CMD command is going to be executed
+EXPOSE <port number> - sets a port of process inside the container to the "outside world"
+MAINTAINER <author name> - declares the author of the image (should come only after the FROM command)
+USER <user id> - defines the user that will execute the docker container
+VOLUME <directory path> - enables access from the container to a directory on the host machine
