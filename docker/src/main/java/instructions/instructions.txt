@@ -10,6 +10,12 @@ docker compose file - a yml file that will be used to execute multiple docker fi
 docker swarm - let's me create multiple containers from multiple hosts by defining a manager host of the network
 	and joining other hosts to it to perform other tasks
 
+process flow:
+first we have to create a docker file. running this file will produce a docker image. now we have 2 options:
+1. run the docker image - that will produce a container.
+2. upload the docker image to docker hub. we can then download this image to another machine (for example: production machine)
+   and then run the image and produce a container from it.
+
 Credentials:
 docker hub repository: username:556667755577575, password: baki18B.18
 repository name for example will be: 556667755577575/test_repo
@@ -36,7 +42,7 @@ I can open cmd or GIT bash to run the following commands:
 "docker build -t <name of image> <folder where the docker file is present (if it's here then we use "."> - to build an image from docker file
 "docker-compose build" - to build several containers from a docker compose file
 "docker-compose up" - to run several containers from a docker compose file
-"docker swarm init --advertise-addr <ip address of host machine>" - initialize the current host as a manager host. this will generate
+"docker swarm init --advertise-addr <ip address of  host machine>" - initialize the current host as a manager host. this will generate
 	a command to add a worker to that network
 "docker swarm join-token worker" - this will retrieve the same output as "docker swarm init" command
 
